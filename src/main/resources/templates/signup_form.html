@@ -1,0 +1,56 @@
+<html layout:decorate="~{layout1}">
+<head>
+    <title>회원가입</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="member-container">
+        <div class="header">
+            <div>회원 가입을 위해</div>
+            <div>정보를 입력해주세요</div>
+            <div th:if="${error != null}" th:text="${error}"></div>
+        </div>
+        <!-- 회원가입 폼 -->
+        <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+            <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+            <!-- 사용자 ID 입력 -->
+            <div class="user-info" style="margin-bottom: 20px;">
+                <label for="username">* 사용자ID</label>
+                <input type="text" th:field="*{username}" placeholder="Enter here" class="input input-bordered input-info w-full max-w-xs" />
+            </div>
+            <!-- 이메일 입력 -->
+            <div class="user-info" style="margin-bottom: 20px;">
+                <label for="email">* 이메일</label>
+                <input type="email" th:field="*{email}" placeholder="Enter here" class="input input-bordered input-info w-full max-w-xs" />
+            </div>
+            <!-- 비밀번호 입력 -->
+            <div class="user-info" style="margin-bottom: 20px;">
+                <label for="password1">* 비밀번호</label>
+                <input type="password" th:field="*{password1}" placeholder="Enter here" class="input input-bordered input-info w-full max-w-xs" />
+            </div>
+            <!-- 비밀번호 확인 -->
+            <div class="user-info" style="margin-bottom: 20px;">
+                <label for="password2">* 비밀번호 확인</label>
+                <input type="password" th:field="*{password2}" placeholder="Enter here" class="input input-bordered input-info w-full max-w-xs" />
+            </div>
+            <!-- 성별 선택 -->
+            <div class="gender" style="margin-bottom: 20px;">
+                <input type="radio" name="gender" value="women" id="women"/>
+                <label for="women">여성</label>
+                <input type="radio" name="gender" value="men" id="men"/>
+                <label for="men">남성</label>
+            </div>
+            <!-- 약관 동의 -->
+            <div class="agree-check" style="margin-bottom: 20px;">
+                <input type="checkbox" name="agree" />
+                이용약관, 개인정보 수집 및 이용, 마케팅 활용 선택에 모두 동의합니다.
+            </div>
+            <!-- 가입 버튼 -->
+            <div class="btn">
+                <button type="submit" class="btn btn-primary">가입하기</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

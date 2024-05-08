@@ -1,0 +1,41 @@
+<html layout:decorate="~{layout1}">
+<div layout:fragment="content" class="container my-3">
+    <div class="hero min-h-screen bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <div class="text-center lg:text-left">
+                <h1 class="text-5xl font-bold">지금 로그인하세요!</h1>
+                <p class="py-6">여기의 중심에는 모든 인력과 업무에 필요한 모든 것을 체계화할 수 있는 공간인 채널이 있습니다. 채널에서는 부서, 사무실뿐만 아니라 다른 회사와의 연결도 더욱
+                    수월해집니다.</p>
+            </div>
+            <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <form class="card-body" th:action="@{/user/login}" method="post">
+                    <div class="form-control" th:if="${param.error}">
+                        <div class="alert alert-danger">
+                            사용자ID 또는 비밀번호를 확인해 주세요.
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">사용자ID</span>
+                        </label>
+                        <input type="text" name="username" id="username" class="input input-bordered" required/>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">비밀번호</span>
+                        </label>
+                        <input type="password" name="password" id="password" class="input input-bordered" required/>
+                        <label class="label">
+                            <a href="/user/find-account" class="label-text-alt link link-hover">비밀번호를 잊으셨나요?</a>
+                        </label>
+                    </div>
+                    <div class="form-control mt-6">
+                        <button class="btn btn-primary" type="submit">로그인</button>
+                        <a th:href="@{|/oauth2/authorization/google|}" class="btn">Google</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
