@@ -34,4 +34,12 @@ public class SiteUser {
     private String email;
 
     private String userRole;
+
+    private String mobile;
+
+    private String location;
+
+    private String languages;
+
+    private String birthday;
 }

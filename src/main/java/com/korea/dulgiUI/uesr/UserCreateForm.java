@@ -24,9 +24,17 @@ public class UserCreateForm {
     @Email
     private String email;
 
-    private String gender; // 라디오 버튼 값 받기
+    private String gender; // 라디오 버튼영어 값 받기
 
     private String nickname;
+
+    private String mobile;
+
+    private String location;
+
+    private String languages;
+
+    private String birthday;
 
     private String agree;
 }

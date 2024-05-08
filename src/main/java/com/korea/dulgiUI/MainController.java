@@ -10,6 +10,7 @@ public class MainController {
     @RequestMapping("/")
     public String root(Principal principal) {
         if (principal != null) {
+
             return "redirect:/question/list/qna";
         } else {
             return "redirect:/user/login";

@@ -114,7 +114,7 @@ public class UserController {
             bindingResult.rejectValue("password2", "passwordInCorrect", "2개의 패스워드가 일치하지 않습니다.");
             return "signup_form";
         }
-        if(userCreateForm.getAgree() == null){
+        if (userCreateForm.getAgree() == null) {
 //            redirectAttributes.addFlashAttribute("error","이용약관에 동의해주세요.");
             model.addAttribute("error", "이용약관에 동의해주세요");
 //            return "redirect:/user/signup";
@@ -122,7 +122,16 @@ public class UserController {
         }
 
         try {
-            userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), userCreateForm.getPassword1(), userCreateForm.getGender());
+            userService.create(
+                    userCreateForm.getUsername(),
+                    userCreateForm.getNickname(),
+                    userCreateForm.getEmail(),
+                    userCreateForm.getPassword1(),
+                    userCreateForm.getBirthday(),
+                    userCreateForm.getGender(),
+                    userCreateForm.getMobile(),
+                    userCreateForm.getLocation()
+            );
 
             return "success";
         } catch (DataIntegrityViolationException e) {
@@ -151,7 +160,7 @@ public class UserController {
         SiteUser siteUser = userService.getUserByEmail(email);
         siteUser.setPassword(passwordEncoder.encode(newpassword));
         userRepository.save(siteUser);
-        emailService.sendMail(siteUser.getEmail(),newpassword);
+        emailService.sendMail(siteUser.getEmail(), newpassword);
 
         return "redirect:/user/login";
     }
@@ -189,6 +198,7 @@ public class UserController {
         private static final String OTHER_CHAR = "!@#$%&*()_+-=[]?";
         private static final String PASSWORD_ALLOW_BASE = CHAR_LOWER + CHAR_UPPER + NUMBER + OTHER_CHAR;
         private static final int PASSWORD_LENGTH = 12;
+
         public String generateRandomPassword() {
             if (PASSWORD_LENGTH < 1) throw new IllegalArgumentException("Password length must be at least 1");
 

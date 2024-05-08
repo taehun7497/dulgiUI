@@ -16,9 +16,13 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public SiteUser create(String username,
+                           String nickname,
                            String email,
                            String password,
-                           String gender) {
+                           String gender,
+                           String location,
+                           String mobile,
+                           String languages) {
 
         SiteUser user = new SiteUser();
         //BCrypt 해싱함수를 사용해서 암호화
@@ -27,6 +31,10 @@ public class UserService {
         user.setUsername(username);
         user.setEmail(email);
         user.setGender(gender);
+        user.setNickname(nickname);
+        user.setLocation(location);
+        user.setMobile(mobile);
+        user.setLanguages(languages);
         this.userRepository.save(user);
         return user;
     }
